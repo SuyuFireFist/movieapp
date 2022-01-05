@@ -33,12 +33,15 @@ public class SocController {
 	public ModelAndView letterhome(Principal principal,Authentication authentication, int currentPage) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		String user_id = (String) userDetails.getUsername();
+		
 		ModelAndView homeview = new ModelAndView();
 		List<SocVO> letlist = new ArrayList<SocVO>();
+		
 		PageVO page = new PageVO();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", user_id);
 		map.put("currentPage", currentPage);
+		
 		letlist = socmapper.findletter(map);	
 		int totalCount = socmapper.listcnt(user_id);
 		int cntPerPage=5;
@@ -54,6 +57,7 @@ public class SocController {
 		page.setList(letlist);
 		page.setStartPage(startPage);
 		page.setEndPage(endPage);
+		
 		homeview.setViewName("letter/letterhome");
 		homeview.addObject("page",page);
 		return homeview;

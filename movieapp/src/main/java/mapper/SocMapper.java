@@ -41,8 +41,7 @@ public interface SocMapper {
 
 	@Delete("DELETE FROM letter WHERE letter_seq = #{letter_seq}")
 	void removeletter(Integer integer);
-
-	/* to_char(write_date,'hh:mi:ss') */
+	
 	@Select("SELECT letter_seq,user_id,title,content,rcv_id, write_date, sysdate,readyn,sent_del,rcv_del FROM letter where letter_seq = #{letter_seq}")
 	SocVO getletter(int letter_seq);
 
