@@ -121,7 +121,7 @@ public class SocController {
 	}
 	
 	@RequestMapping(value="/letdontread")
-	public ModelAndView dontletread(HttpServletRequest req, @RequestParam(value="rcv_id")String user_id, int currentPage){
+	public ModelAndView dontletread(@RequestParam(value="rcv_id")String user_id, int currentPage){
 		System.out.println("currentPage="+currentPage);
 		if(currentPage==0) {
 			currentPage=1;
@@ -155,7 +155,7 @@ public class SocController {
 	}
 
 	@RequestMapping(value = "letterwrite")
-	public ModelAndView letterwrite(HttpServletRequest req, String letter_seq) {
+	public ModelAndView letterwrite(String letter_seq) {
 		ModelAndView wrletter = new ModelAndView();
 		if (letter_seq != null) {
 			wrletter.addObject("letrcvid", socmapper.findrcvid(Integer.parseInt(letter_seq)));
@@ -166,7 +166,7 @@ public class SocController {
 	}
 	
 	@RequestMapping(value = "sendletter")
-	public ModelAndView sendForm(HttpServletRequest req, SocVO sv) {
+	public ModelAndView sendForm(SocVO sv) {
 		ModelAndView sendletter = new ModelAndView();
 		int currentPage=1;
 		String[] real_rcv_id = sv.getRcv_id().split(",");
@@ -208,8 +208,7 @@ public class SocController {
 	}
 	
 	@RequestMapping(value = "letterresult")
-	public ModelAndView resultForm(HttpServletRequest req, HttpSession session,
-			@RequestParam(value = "letter_seq") int letter_seq) {
+	public ModelAndView resultForm(@RequestParam(value = "letter_seq") int letter_seq) {
 		ModelAndView resultlet = new ModelAndView();
 		SocVO letsv = new SocVO();
 		letsv = socmapper.getletter(letter_seq);
